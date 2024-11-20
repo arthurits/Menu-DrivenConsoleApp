@@ -32,6 +32,7 @@ public static class Program
     /// <para />
     /// The menu is displayed until the user decides to exit the application.
     /// </remarks>
+    /// <seealso href="https://www.codeproject.com/Articles/5382189/Building-a-Menu-Driven-Console-Application-in-Csha"/>
     public static void Main()
     {
         while (true)
