@@ -75,7 +75,7 @@ public static class Program
                         Console.Write("Are you sure you want to exit the application? (Y/N): ");
                         var userInput = Console.ReadLine();
                         if (userInput is null) break;
-                        char confirmation = userInput.Length > 0 ? userInput.ToUpper()[0] : userInput.ToCharArray()[0];
+                        char confirmation = userInput.Length > 0 ? userInput.ToUpper()[0] : '0';
                         Console.WriteLine();
                         if (confirmation == 'Y')
                         {
