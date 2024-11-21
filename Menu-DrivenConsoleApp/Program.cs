@@ -6,17 +6,20 @@ namespace MenuDemo;
 
 public enum MenuChoices
 {
+    [Description("No value selected, default")]
+    NoSelection = 0,
+
     [Description("Eat Candy")]
-    EatCandy,
+    EatCandy = 1,
 
     [Description("Go Fishing")]
-    GoFishing,
+    GoFishing = 2,
 
     [Description("Play Basketball")]
-    PlayBasketball,
+    PlayBasketball = 3,
 
     [Description("Exit")]
-    Exit
+    Exit = 4
 }
 
 public static class Program
@@ -38,42 +41,41 @@ public static class Program
         while (true)
         {
             DisplayMenu();
-            var choice = GetUserChoice();
+            MenuChoices choice = GetUserChoice();
 
-            // Convert 1-based menu choice to 0-based index
-            var choiceIndex = (int)choice - 1;
+            //int menuLowerValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(0);
+            //int menuUpperValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(Enum.GetValues(typeof(MenuChoices)).Length - 1);
 
             // Check if choice is within the valid range
-            if (choiceIndex >= 0 && choiceIndex < Enum
-                    .GetValues(typeof(MenuChoices))
-                    .Length) // Check against all menu items
-                             // Perform action based on user choice index
-                switch (choiceIndex)
+            if (Enum.IsDefined(typeof(MenuChoices), choice))
+            {
+                // Check against all menu items
+                // Perform action based on user choice index
+                switch (choice)
                 {
-                    case (int)MenuChoices.EatCandy:
+                    case MenuChoices.EatCandy:
                         Console.WriteLine("You chose to Eat Candy.");
 
                         // Add your Eat Candy logic here
                         break;
 
-                    case (int)MenuChoices.GoFishing:
+                    case MenuChoices.GoFishing:
                         Console.WriteLine("You chose to Go Fishing.");
 
                         // Add your Go Fishing logic here
                         break;
 
-                    case (int)MenuChoices.PlayBasketball:
+                    case MenuChoices.PlayBasketball:
                         Console.WriteLine("You chose to Play Basketball.");
 
                         // Add your Play Basketball logic here
                         break;
 
-                    case (int)MenuChoices.Exit:
-                        Console.Write(
-                            "Are you sure you want to exit the application? (Y/N): "
-                        );
-                        var confirmation = Console.ReadLine()
-                            .ToUpper()[0];
+                    case MenuChoices.Exit:
+                        Console.Write("Are you sure you want to exit the application? (Y/N): ");
+                        var userInput = Console.ReadLine();
+                        if (userInput is null) break;
+                        char confirmation = userInput.Length > 0 ? userInput.ToUpper()[0] : '0';
                         Console.WriteLine();
                         if (confirmation == 'Y')
                         {
@@ -85,13 +87,14 @@ public static class Program
                         continue;
 
                     default:
-                        Console.WriteLine(
-                            "Invalid choice. Please try again."
-                        );
+                        Console.WriteLine("Invalid choice. Please try again.");
                         break;
                 }
+            }
             else
+            { 
                 Console.WriteLine("Invalid choice. Please try again.");
+            }
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -113,7 +116,7 @@ public static class Program
         Console.WriteLine("Please choose an action:\n");
         var menuItemNumber = 1;
         foreach (MenuChoices choice in Enum.GetValues(typeof(MenuChoices)))
-            if (choice != MenuChoices.Unknown)
+            if (choice != MenuChoices.NoSelection)
             {
                 var description = GetEnumDescription(choice);
                 Console.WriteLine($"[{menuItemNumber}]:    {description}");
@@ -124,16 +127,11 @@ public static class Program
     }
 
     /// <summary>
-    /// Retrieves the description attribute value associated with the specified enum
-    /// value.
+    /// Retrieves the description attribute value associated with the specified enum value.
     /// </summary>
-    /// <param name="value">
-    /// The <see langword="enum" /> value for which to retrieve the
-    /// description.
-    /// </param>
+    /// <param name="value">The <see langword="enum" /> value for which to retrieve the description.</param>
     /// <returns>
-    /// The description associated with the <see langword="enum" /> value, if
-    /// available; otherwise, the
+    /// The description associated with the <see langword="enum" /> value, if available; otherwise, the
     /// string representation of the <see langword="enum" /> value.
     /// </returns>
     /// <remarks>
@@ -145,21 +143,18 @@ public static class Program
     /// </remarks>
     private static string GetEnumDescription(Enum value)
     {
-        var field = value.GetType()
-                         .GetField(value.ToString());
-        var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(
-            field, typeof(DescriptionAttribute)
-        );
-        return attribute == null ? value.ToString() : attribute.Description;
+        var field = value.GetType().GetField(value.ToString());
+        
+        var attribute = field is null ? null : (DescriptionAttribute?)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+
+        return attribute is null ? value.ToString() : attribute.Description;
     }
 
     /// <summary>
-    /// Reads user input from the console and parses it into a
-    /// <see cref="T:MenuDemo.MenuChoices" /> enumeration value.
+    /// Reads user input from the console and parses it into a <see cref="T:MenuDemo.MenuChoices" /> enumeration value.
     /// </summary>
     /// <returns>
-    /// The <see cref="T:MenuDemo.MenuChoices" /> enumeration value corresponding to
-    /// the user input.
+    /// The <see cref="T:MenuDemo.MenuChoices" /> enumeration value corresponding to the user input.
     /// If the input cannot be parsed into a valid enumeration value, returns
     /// <see cref="F:MenuDemo.MenuChoices.Unknown" />.
     /// </returns>
@@ -176,8 +171,6 @@ public static class Program
     private static MenuChoices GetUserChoice()
     {
         var input = Console.ReadLine();
-        return Enum.TryParse(input, out MenuChoices choice)
-            ? choice
-            : MenuChoices.Unknown;
+        return Enum.TryParse(input, out MenuChoices choice) ? choice : default;
     }
 }
