@@ -3,7 +3,7 @@
 using System.ComponentModel;
 using MenuChoicesData;
 
-namespace MenuDemo;
+namespace MenuApp;
 
 
 public static class Program
