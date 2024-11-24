@@ -1,26 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.ComponentModel;
+using MenuChoicesData;
 
-namespace MenuDemo;
+namespace MenuApp;
 
-public enum MenuChoices
-{
-    [Description("No value selected, default")]
-    NoSelection = 0,
-
-    [Description("Eat Candy")]
-    EatCandy = 1,
-
-    [Description("Go Fishing")]
-    GoFishing = 2,
-
-    [Description("Play Basketball")]
-    PlayBasketball = 3,
-
-    [Description("Exit")]
-    Exit = 4
-}
 
 public static class Program
 {
