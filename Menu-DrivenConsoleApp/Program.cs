@@ -112,7 +112,7 @@ public static class Program
             if (choice != MenuChoices.NoSelection)
             {
                 var description = GetEnumDescription(choice);
-                Console.WriteLine($"[{menuItemNumber}]:    {description}");
+                Console.WriteLine($"[{menuItemNumber}]:{(char)ConsoleKey.Tab}{description}");
                 menuItemNumber++;
             }
 
