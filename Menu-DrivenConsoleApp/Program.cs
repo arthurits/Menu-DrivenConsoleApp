@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.ComponentModel;
+using System.Numerics;
 using MenuChoicesData;
 
 namespace MenuApp;
@@ -56,20 +57,28 @@ public static class Program
                         break;
 
                     case MenuChoices.Exit:
-                        Console.Write("Are you sure you want to exit the application? (Y/N): ");
-                        var userInput = Console.ReadLine();
-                        if (userInput is null) break;
-                        char confirmation = userInput.Length > 0 ? userInput.ToUpper()[0] : '0';
-                        Console.WriteLine();
-                        if (confirmation == 'Y')
+                        bool loop = true;
+                        while (loop == true)
                         {
-                            Console.WriteLine("Exiting the application...");
-                            return; // Exit the Main method
+                            Console.Write("Are you sure you want to exit the application? (Y/N): ");
+                            var userInput = Console.ReadLine();
+                            if (userInput is not null)
+                            {
+                                char confirmation = userInput.Length > 0 ? userInput.ToUpper()[0] : '0';
+                                if (confirmation == 'Y')
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Exiting the application...");
+                                    return; // Exit the Main method
+                                }
+                                else if (confirmation == 'N')
+                                {
+                                    Console.Clear();
+                                    loop = false;
+                                }
+                            }
                         }
-
-                        Console.Clear();
                         continue;
-
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
