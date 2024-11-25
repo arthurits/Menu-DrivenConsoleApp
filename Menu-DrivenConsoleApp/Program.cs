@@ -65,6 +65,7 @@ public static class Program
                             if (userInput == ConsoleKey.Y)
                             {
                                 Console.WriteLine();
+                                Console.WriteLine();
                                 Console.WriteLine("Exiting the application...");
                                 return; // Exit the Main method
                             }
@@ -89,6 +90,7 @@ public static class Program
                 Console.WriteLine("Invalid choice. Please try again.");
             }
 
+            Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
             Console.Clear(); // Clear the console for the next iteration
@@ -106,7 +108,9 @@ public static class Program
     /// </remarks>
     private static void DisplayMenu()
     {
-        Console.WriteLine("Please choose an action:\n");
+        Console.WriteLine("Please choose an action:");
+        Console.WriteLine();
+        
         var menuItemNumber = 1;
         foreach (MenuChoices choice in Enum.GetValues(typeof(MenuChoices)))
             if (choice != MenuChoices.NoSelection)
@@ -116,7 +120,8 @@ public static class Program
                 menuItemNumber++;
             }
 
-        Console.Write("\nEnter your selection: ");
+        Console.WriteLine();
+        Console.Write("Enter your selection: ");
     }
 
     /// <summary>
