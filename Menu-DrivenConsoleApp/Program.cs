@@ -61,21 +61,21 @@ public static class Program
                         while (loop == true)
                         {
                             Console.Write("Are you sure you want to exit the application? (Y/N): ");
-                            var userInput = Console.ReadLine();
-                            if (userInput is not null)
+                            var userInput = Console.ReadKey().Key;  //var userInput = Char.ToUpper(Console.ReadKey().KeyChar);
+                            if (userInput == ConsoleKey.Y)
                             {
-                                char confirmation = userInput.Length > 0 ? userInput.ToUpper()[0] : '0';
-                                if (confirmation == 'Y')
-                                {
-                                    Console.WriteLine();
-                                    Console.WriteLine("Exiting the application...");
-                                    return; // Exit the Main method
-                                }
-                                else if (confirmation == 'N')
-                                {
-                                    Console.Clear();
-                                    loop = false;
-                                }
+                                Console.WriteLine();
+                                Console.WriteLine("Exiting the application...");
+                                return; // Exit the Main method
+                            }
+                            else if (userInput == ConsoleKey.N)
+                            {
+                                Console.Clear();
+                                loop = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine();
                             }
                         }
                         continue;
