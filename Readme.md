@@ -3,7 +3,8 @@ Basic console application with a menu-driven interface.
 The application loops through a menu until the exit option is chosen.
 
 ![Menu option 2](/Media/Menu-Option.png?raw=true "Menu, option 2")
-![Menu exit](/Media/Menu-Exit.png?raw=true "Menu, exit")
+
+<div style="border: 2px solid black;">![Menu exit](/Media/Menu-Exit.png?raw=true "Menu, exit")</div>
 
 ## Links
 The code in this repository is based on the following article by Brian C. Hart:
