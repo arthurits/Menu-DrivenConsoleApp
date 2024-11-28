@@ -30,7 +30,7 @@ public static partial class Program
             //int menuUpperValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(Enum.GetValues(typeof(MenuChoices)).Length - 1);
 
             // Check if choice is within the valid range
-            if (Enum.IsDefined(typeof(MenuChoices), choice))
+            if (Enum.IsDefined(choice))
             {
                 // Check against all menu items
                 // Perform action based on user choice index
@@ -105,7 +105,7 @@ public static partial class Program
         Console.WriteLine();
         
         var menuItemNumber = 1;
-        foreach (MenuChoices choice in Enum.GetValues(typeof(MenuChoices)))
+        foreach (MenuChoices choice in Enum.GetValues<MenuChoices>())
             if (choice != MenuChoices.NoSelection)
             {
                 var description = GetEnumDescription(choice);
