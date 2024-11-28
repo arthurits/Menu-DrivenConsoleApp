@@ -94,8 +94,7 @@ public static partial class Program
     /// Displays the menu of choices on the console.
     /// </summary>
     /// <remarks>
-    /// This method iterates through all the available menu choices and displays them
-    /// along with their corresponding numbers.
+    /// This method iterates through all the available menu choices and displays them along with their corresponding numbers.
     /// <para />
     /// The numbering of the choices starts from <c>1</c>.
     /// </remarks>
@@ -129,8 +128,7 @@ public static partial class Program
     /// This method retrieves the description attribute value, if present, associated
     /// with the specified <see langword="enum" /> value.
     /// <para />
-    /// If no description attribute is found, it returns the string representation of
-    /// the <see langword="enum" /> value.
+    /// If no description attribute is found, it returns the string representation of the <see langword="enum" /> value.
     /// </remarks>
     private static string GetEnumDescription(Enum value)
     {
@@ -146,18 +144,15 @@ public static partial class Program
     /// </summary>
     /// <returns>
     /// The <see cref="T:MenuDemo.MenuChoices" /> enumeration value corresponding to the user input.
-    /// If the input cannot be parsed into a valid enumeration value, returns
-    /// <see cref="F:MenuDemo.MenuChoices.Unknown" />.
+    /// If the input cannot be parsed into a valid enumeration value, returns <see cref="F:MenuDemo.MenuChoices.NoSelection" />.
     /// </returns>
     /// <remarks>
     /// This method reads a line of text from the console input and attempts to parse
     /// it into a <see cref="T:MenuDemo.MenuChoices" /> enumeration value.
     /// <para />
-    /// If the input matches any of the enumeration values, the corresponding
-    /// enumeration value is returned.
+    /// If the input matches any of the enumeration values, the corresponding enumeration value is returned.
     /// <para />
-    /// If the input cannot be parsed into a valid enumeration value, the method
-    /// returns <see cref="F:MenuDemo.MenuChoices.Unknown" />.
+    /// If the input cannot be parsed into a valid enumeration value, the method returns <see cref="F:MenuDemo.MenuChoices.NoSelection" />.
     /// </remarks>
     private static MenuChoices GetUserChoice()
     {
