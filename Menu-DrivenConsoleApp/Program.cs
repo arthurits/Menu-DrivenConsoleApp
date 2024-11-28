@@ -1,13 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.ComponentModel;
-using System.Numerics;
 using MenuChoicesData;
+using System.ComponentModel;
 
 namespace MenuApp;
 
-
-public static class Program
+public static partial class Program
 {
     /// <summary>
     /// The entry point of the application.
@@ -39,21 +37,15 @@ public static class Program
                 switch (choice)
                 {
                     case MenuChoices.EatCandy:
-                        Console.WriteLine("You chose to Eat Candy.");
-
-                        // Add your Eat Candy logic here
+                        Choice_EatCandy();
                         break;
 
                     case MenuChoices.GoFishing:
-                        Console.WriteLine("You chose to Go Fishing.");
-
-                        // Add your Go Fishing logic here
+                        Choice_GoFishing();
                         break;
 
                     case MenuChoices.PlayBasketball:
-                        Console.WriteLine("You chose to Play Basketball.");
-
-                        // Add your Play Basketball logic here
+                        Choice_PlayBasketball();
                         break;
 
                     case MenuChoices.Exit:
@@ -80,6 +72,7 @@ public static class Program
                             }
                         }
                         continue;
+                    
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
