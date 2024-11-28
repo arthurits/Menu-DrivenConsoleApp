@@ -24,7 +24,7 @@ public static partial class Program
         while (true)
         {
             DisplayMenu();
-            MenuChoices choice = GetUserChoice();
+            ChoicesModel choice = GetUserChoice();
 
             //int menuLowerValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(0);
             //int menuUpperValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(Enum.GetValues(typeof(MenuChoices)).Length - 1);
@@ -36,19 +36,19 @@ public static partial class Program
                 // Perform action based on user choice index
                 switch (choice)
                 {
-                    case MenuChoices.EatCandy:
+                    case ChoicesModel.EatCandy:
                         Choice_EatCandy();
                         break;
 
-                    case MenuChoices.GoFishing:
+                    case ChoicesModel.GoFishing:
                         Choice_GoFishing();
                         break;
 
-                    case MenuChoices.PlayBasketball:
+                    case ChoicesModel.PlayBasketball:
                         Choice_PlayBasketball();
                         break;
 
-                    case MenuChoices.Exit:
+                    case ChoicesModel.Exit:
                         bool loop = true;
                         while (loop == true)
                         {
@@ -105,8 +105,8 @@ public static partial class Program
         Console.WriteLine();
         
         var menuItemNumber = 1;
-        foreach (MenuChoices choice in Enum.GetValues<MenuChoices>())
-            if (choice != MenuChoices.NoSelection)
+        foreach (ChoicesModel choice in Enum.GetValues<ChoicesModel>())
+            if (choice != ChoicesModel.NoSelection)
             {
                 var description = GetEnumDescription(choice);
                 Console.WriteLine($"[{menuItemNumber}]:{(char)ConsoleKey.Tab}{description}");
@@ -159,9 +159,9 @@ public static partial class Program
     /// If the input cannot be parsed into a valid enumeration value, the method
     /// returns <see cref="F:MenuDemo.MenuChoices.Unknown" />.
     /// </remarks>
-    private static MenuChoices GetUserChoice()
+    private static ChoicesModel GetUserChoice()
     {
         var input = Console.ReadLine();
-        return Enum.TryParse(input, out MenuChoices choice) ? choice : default;
+        return Enum.TryParse(input, out ChoicesModel choice) ? choice : default;
     }
 }
