@@ -2,6 +2,7 @@
 
 using ChoicesModel;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MenuApp;
 
@@ -24,7 +25,7 @@ public static partial class Program
         while (true)
         {
             DisplayMenu();
-            ChoicesModel.ChoicesModel choice = GetUserChoice();
+            MenuChoices choice = GetUserChoice();
 
             //int menuLowerValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(0);
             //int menuUpperValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(Enum.GetValues(typeof(MenuChoices)).Length - 1);
@@ -32,23 +33,22 @@ public static partial class Program
             // Check if choice is within the valid range
             if (Enum.IsDefined(choice))
             {
-                // Check against all menu items
                 // Perform action based on user choice index
                 switch (choice)
                 {
-                    case ChoicesModel.ChoicesModel.EatCandy:
+                    case MenuChoices.EatCandy:
                         Choice_EatCandy();
                         break;
 
-                    case ChoicesModel.ChoicesModel.GoFishing:
+                    case MenuChoices.GoFishing:
                         Choice_GoFishing();
                         break;
 
-                    case ChoicesModel.ChoicesModel.PlayBasketball:
+                    case MenuChoices.PlayBasketball:
                         Choice_PlayBasketball();
                         break;
 
-                    case ChoicesModel.ChoicesModel.Exit:
+                    case MenuChoices.Exit:
                         bool loop = true;
                         while (loop == true)
                         {
@@ -103,14 +103,17 @@ public static partial class Program
         Console.WriteLine("Please choose an action:");
         Console.WriteLine();
         
-        var menuItemNumber = 1;
-        foreach (ChoicesModel choice in Enum.GetValues<ChoicesModel>())
-            if (choice != ChoicesModel.NoSelection)
-            {
-                var description = GetEnumDescription(choice);
-                Console.WriteLine($"[{menuItemNumber}]:{(char)ConsoleKey.Tab}{description}");
-                menuItemNumber++;
-            }
+        for (int i = 1;  i < Enum.GetValues(typeof(MenuChoices)).Length; i++)
+            Console.WriteLine($"[{i}]:{(char)ConsoleKey.Tab}{GetEnumDescription(i)}");
+
+        //var menuItemNumber = 1;
+        //foreach (MenuChoices choice in Enum.GetValues<MenuChoices>())
+        //    if (choice is not MenuChoices.NoSelection)
+        //    {
+        //        var description = GetEnumDescription(choice);
+        //        Console.WriteLine($"[{menuItemNumber}]:{(char)ConsoleKey.Tab}{description}");
+        //        menuItemNumber++;
+        //    }
 
         Console.WriteLine();
         Console.Write("Enter your selection: ");
@@ -140,11 +143,36 @@ public static partial class Program
     }
 
     /// <summary>
+    /// Retrieves the description attribute value associated with the specified enum value.
+    /// </summary>
+    /// <param name="value">The <see langword="enum" /> value for which to retrieve the description.</param>
+    /// <returns>
+    /// The description associated with the <see langword="enum" /> value, if available; otherwise, the
+    /// string representation of the <see langword="enum" /> value.
+    /// </returns>
+    /// <remarks>
+    /// This method retrieves the description attribute value, if present, associated
+    /// with the specified <see langword="enum" /> value.
+    /// <para />
+    /// If no description attribute is found, it returns the string representation of the <see langword="enum" /> value.
+    /// </remarks>
+    private static string GetEnumDescription(int value)
+    {
+        var enumValue = (Enum?)Enum.GetValues<MenuChoices>().GetValue(value);
+
+        var field = enumValue?.GetType().GetField(enumValue.ToString());
+
+        var attribute = field is null ? null : (DescriptionAttribute?)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+
+        return attribute is null ? (enumValue is null ? string.Empty : enumValue.ToString()) : attribute.Description;
+    }
+
+    /// <summary>
     /// Reads user input from the console and parses it into a <see cref="T:MenuDemo.MenuChoices" /> enumeration value.
     /// </summary>
     /// <returns>
     /// The <see cref="T:MenuDemo.MenuChoices" /> enumeration value corresponding to the user input.
-    /// If the input cannot be parsed into a valid enumeration value, returns <see cref="F:MenuDemo.MenuChoices.NoSelection" />.
+    /// If the input cannot be parsed into a valid enumeration value, returns <see cref="F:MenuDemo.MenuChoices" /> zero value.
     /// </returns>
     /// <remarks>
     /// This method reads a line of text from the console input and attempts to parse
@@ -152,11 +180,11 @@ public static partial class Program
     /// <para />
     /// If the input matches any of the enumeration values, the corresponding enumeration value is returned.
     /// <para />
-    /// If the input cannot be parsed into a valid enumeration value, the method returns <see cref="F:MenuDemo.MenuChoices.NoSelection" />.
+    /// If the input cannot be parsed into a valid enumeration value, the method returns <see cref="F:MenuDemo.MenuChoices" /> zero value.
     /// </remarks>
-    private static ChoicesModel.ChoicesModel GetUserChoice()
+    private static MenuChoices GetUserChoice()
     {
         var input = Console.ReadLine();
-        return Enum.TryParse(input, out ChoicesModel choice) ? choice : default;
+        return Enum.TryParse(input, out MenuChoices choice) ? choice : default;
     }
 }
