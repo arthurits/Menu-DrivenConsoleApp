@@ -122,6 +122,28 @@ public static partial class Program
     /// <summary>
     /// Retrieves the description attribute value associated with the specified enum value.
     /// </summary>
+    /// <param name="value">The <see langword="enum" /> string value for which to retrieve the description.</param>
+    /// <returns>
+    /// The description associated with the <see langword="enum" /> value, if available; otherwise, the
+    /// string representation of the <see langword="enum" /> value.
+    /// </returns>
+    /// <remarks>
+    /// This method retrieves the description attribute value, if present, associated
+    /// with the specified <see langword="enum" /> value.
+    /// <para />
+    /// If no description attribute is found, it returns the string representation of the <see langword="enum" /> value.
+    /// </remarks>
+    private static string GetEnumDescription(string value)
+    {
+        var field = value.GetType().GetField(value);
+        var attribute = field is null ? null : (DescriptionAttribute?)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+
+        return attribute is null ? value.ToString() : attribute.Description;
+    }
+
+    /// <summary>
+    /// Retrieves the description attribute value associated with the specified enum value.
+    /// </summary>
     /// <param name="value">The <see langword="enum" /> value for which to retrieve the description.</param>
     /// <returns>
     /// The description associated with the <see langword="enum" /> value, if available; otherwise, the
@@ -135,13 +157,7 @@ public static partial class Program
     /// </remarks>
     private static string GetEnumDescription(Enum? value)
     {
-        if (value is null) return string.Empty;
-
-        var field = value.GetType().GetField(value.ToString());
-        
-        var attribute = field is null ? null : (DescriptionAttribute?)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-
-        return attribute is null ? value.ToString() : attribute.Description;
+        return value is null ? string.Empty : GetEnumDescription(value.ToString());
     }
 
     /// <summary>
