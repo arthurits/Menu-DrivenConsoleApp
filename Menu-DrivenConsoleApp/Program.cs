@@ -50,7 +50,7 @@ public static partial class Program
                         while (loop == true)
                         {
                             Console.Write("Are you sure you want to exit the application? (Y/N): ");
-                            var userInput = Console.ReadKey().Key;  //var userInput = Char.ToUpper(Console.ReadKey().KeyChar);
+                            var userInput = Console.ReadKey().Key;  //Alternate: var userInput = Char.ToUpper(Console.ReadKey().KeyChar);
                             if (userInput == ConsoleKey.Y)
                             {
                                 Console.WriteLine();
