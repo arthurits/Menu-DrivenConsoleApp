@@ -2,7 +2,7 @@
 
 namespace ChoicesModel;
 
-public enum ChoicesModel
+public enum MenuChoices
 {
     [Description("No value selected, default")]
     NoSelection = 0,
