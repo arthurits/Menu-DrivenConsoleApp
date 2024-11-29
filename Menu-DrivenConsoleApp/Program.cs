@@ -27,10 +27,7 @@ public static partial class Program
             DisplayMenu();
             MenuChoices choice = GetUserChoice();
 
-            //int menuLowerValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(0);
-            //int menuUpperValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(Enum.GetValues(typeof(MenuChoices)).Length - 1);
-
-            // Check if choice is within the valid range
+            // Check if choice is within the valid range, since Enum.TryParse on GetUserChoice does return integers outside the enum's range values
             if (Enum.IsDefined(choice))
             {
                 // Perform action based on user choice index
@@ -53,7 +50,7 @@ public static partial class Program
                         while (loop == true)
                         {
                             Console.Write("Are you sure you want to exit the application? (Y/N): ");
-                            var userInput = Console.ReadKey().Key;  //var userInput = Char.ToUpper(Console.ReadKey().KeyChar);
+                            var userInput = Console.ReadKey().Key;  //Alternate: var userInput = Char.ToUpper(Console.ReadKey().KeyChar);
                             if (userInput == ConsoleKey.Y)
                             {
                                 Console.WriteLine();
@@ -103,9 +100,12 @@ public static partial class Program
         Console.WriteLine("Please choose an action:");
         Console.WriteLine();
         
+        // This is one (compact, less code) way to show the menu on screen
+        // The loop starts at 1 since value 0 is the NoSelection/Undefined default enum option
         for (int i = 1;  i < Enum.GetValues<MenuChoices>().Length; i++)
             Console.WriteLine($"[{i}]:{(char)ConsoleKey.Tab}{GetEnumDescription(i)}");
 
+        // This is a more verbose (more code) way to show the menu on screen
         //var menuItemNumber = 1;
         //foreach (MenuChoices choice in Enum.GetValues<MenuChoices>())
         //    if (choice is not MenuChoices.NoSelection)
