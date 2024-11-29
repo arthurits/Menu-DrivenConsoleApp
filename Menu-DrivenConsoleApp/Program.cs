@@ -133,8 +133,10 @@ public static partial class Program
     /// <para />
     /// If no description attribute is found, it returns the string representation of the <see langword="enum" /> value.
     /// </remarks>
-    private static string GetEnumDescription(Enum value)
+    private static string GetEnumDescription(Enum? value)
     {
+        if (value is null) return string.Empty;
+
         var field = value.GetType().GetField(value.ToString());
         
         var attribute = field is null ? null : (DescriptionAttribute?)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
@@ -145,7 +147,7 @@ public static partial class Program
     /// <summary>
     /// Retrieves the description attribute value associated with the specified enum value.
     /// </summary>
-    /// <param name="value">The <see langword="enum" /> value for which to retrieve the description.</param>
+    /// <param name="value">The <see langword="enum" /> numerical value for which to retrieve the description.</param>
     /// <returns>
     /// The description associated with the <see langword="enum" /> value, if available; otherwise, the
     /// string representation of the <see langword="enum" /> value.
@@ -158,13 +160,7 @@ public static partial class Program
     /// </remarks>
     private static string GetEnumDescription(int value)
     {
-        var enumValue = (Enum?)Enum.GetValues<MenuChoices>().GetValue(value);
-
-        var field = enumValue?.GetType().GetField(enumValue.ToString());
-
-        var attribute = field is null ? null : (DescriptionAttribute?)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-
-        return attribute is null ? (enumValue is null ? string.Empty : enumValue.ToString()) : attribute.Description;
+        return GetEnumDescription((Enum?)Enum.GetValues<MenuChoices>().GetValue(value));
     }
 
     /// <summary>
