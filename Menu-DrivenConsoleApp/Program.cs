@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using MenuChoicesData;
+using ChoicesModel;
 using System.ComponentModel;
 
 namespace MenuApp;
@@ -24,7 +24,7 @@ public static partial class Program
         while (true)
         {
             DisplayMenu();
-            ChoicesModel choice = GetUserChoice();
+            ChoicesModel.ChoicesModel choice = GetUserChoice();
 
             //int menuLowerValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(0);
             //int menuUpperValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(Enum.GetValues(typeof(MenuChoices)).Length - 1);
@@ -36,19 +36,19 @@ public static partial class Program
                 // Perform action based on user choice index
                 switch (choice)
                 {
-                    case ChoicesModel.EatCandy:
+                    case ChoicesModel.ChoicesModel.EatCandy:
                         Choice_EatCandy();
                         break;
 
-                    case ChoicesModel.GoFishing:
+                    case ChoicesModel.ChoicesModel.GoFishing:
                         Choice_GoFishing();
                         break;
 
-                    case ChoicesModel.PlayBasketball:
+                    case ChoicesModel.ChoicesModel.PlayBasketball:
                         Choice_PlayBasketball();
                         break;
 
-                    case ChoicesModel.Exit:
+                    case ChoicesModel.ChoicesModel.Exit:
                         bool loop = true;
                         while (loop == true)
                         {
@@ -154,7 +154,7 @@ public static partial class Program
     /// <para />
     /// If the input cannot be parsed into a valid enumeration value, the method returns <see cref="F:MenuDemo.MenuChoices.NoSelection" />.
     /// </remarks>
-    private static ChoicesModel GetUserChoice()
+    private static ChoicesModel.ChoicesModel GetUserChoice()
     {
         var input = Console.ReadLine();
         return Enum.TryParse(input, out ChoicesModel choice) ? choice : default;
