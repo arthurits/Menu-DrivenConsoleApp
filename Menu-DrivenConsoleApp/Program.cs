@@ -27,9 +27,6 @@ public static partial class Program
             DisplayMenu();
             MenuChoices choice = GetUserChoice();
 
-            //int menuLowerValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(0);
-            //int menuUpperValue = (int)Enum.GetValues(typeof(MenuChoices)).GetValue(Enum.GetValues(typeof(MenuChoices)).Length - 1);
-
             // Check if choice is within the valid range, since Enum.TryParse on GetUserChoice does return integers outside the enum's range values
             if (Enum.IsDefined(choice))
             {
