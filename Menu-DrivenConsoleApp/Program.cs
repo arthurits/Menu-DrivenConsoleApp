@@ -103,7 +103,7 @@ public static partial class Program
         Console.WriteLine("Please choose an action:");
         Console.WriteLine();
         
-        for (int i = 1;  i < Enum.GetValues(typeof(MenuChoices)).Length; i++)
+        for (int i = 1;  i < Enum.GetValues<MenuChoices>().Length; i++)
             Console.WriteLine($"[{i}]:{(char)ConsoleKey.Tab}{GetEnumDescription(i)}");
 
         //var menuItemNumber = 1;
