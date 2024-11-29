@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace MenuChoicesData;
+namespace ChoicesModel;
 
 public enum ChoicesModel
 {
