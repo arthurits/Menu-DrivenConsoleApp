@@ -13,10 +13,10 @@ public static partial class Program
     /// <remarks>
     /// This method serves as the starting point of the console application.
     /// <para />
-    /// It continuously displays a menu of choices to the user and executes the
-    /// corresponding actions based on their selection.
-    /// <para />
+    /// It continuously displays a menu of choices to the user and executes the corresponding actions based on their selection.
     /// The menu is displayed until the user decides to exit the application.
+    /// <para />
+    /// The code is based on an article by Brian C. Hart published in CodeProject in 2024.
     /// </remarks>
     /// <seealso href="https://www.codeproject.com/Articles/5382189/Building-a-Menu-Driven-Console-Application-in-Csha"/>
     public static void Main()
@@ -26,7 +26,7 @@ public static partial class Program
             DisplayMenu();
             MenuChoices choice = GetUserChoice();
 
-            // Check if choice is within the valid range, since Enum.TryParse on GetUserChoice does return integers outside the enum's range values
+            // Check if choice is within the valid range, since Enum.TryParse in GetUserChoice does return integers outside the enum's range values
             if (Enum.IsDefined(choice))
             {
                 // Perform action based on user choice index
@@ -91,8 +91,7 @@ public static partial class Program
     /// </summary>
     /// <remarks>
     /// This method iterates through all the available menu choices and displays them along with their corresponding numbers.
-    /// <para />
-    /// The numbering of the choices starts from <c>1</c>.
+    /// The numbering of the choices starts from <c>1</c>, assuming value <c>0</c> is the <see langword="enum" />'s undefined option.
     /// </remarks>
     private static void DisplayMenu()
     {
@@ -123,13 +122,10 @@ public static partial class Program
     /// </summary>
     /// <param name="value">The <see langword="enum" /> string value for which to retrieve the description.</param>
     /// <returns>
-    /// The description associated with the <see langword="enum" /> value, if available; otherwise, the
-    /// string representation of the <see langword="enum" /> value.
+    /// The description associated with the <see langword="enum" /> value, if available; otherwise, the string representation of the <see langword="enum" /> value.
     /// </returns>
     /// <remarks>
-    /// This method retrieves the description attribute value, if present, associated
-    /// with the specified <see langword="enum" /> value.
-    /// <para />
+    /// This method retrieves the description attribute value, if present, associated with the specified <see langword="enum" /> value.
     /// If no description attribute is found, it returns the string representation of the <see langword="enum" /> value.
     /// </remarks>
     private static string GetEnumDescription(string value)
@@ -149,9 +145,7 @@ public static partial class Program
     /// string representation of the <see langword="enum" /> value.
     /// </returns>
     /// <remarks>
-    /// This method retrieves the description attribute value, if present, associated
-    /// with the specified <see langword="enum" /> value.
-    /// <para />
+    /// This method retrieves the description attribute value, if present, associated with the specified <see langword="enum" /> value.
     /// If no description attribute is found, it returns the string representation of the <see langword="enum" /> value.
     /// </remarks>
     private static string GetEnumDescription(Enum? value)
@@ -164,13 +158,10 @@ public static partial class Program
     /// </summary>
     /// <param name="value">The <see langword="enum" /> numerical value for which to retrieve the description.</param>
     /// <returns>
-    /// The description associated with the <see langword="enum" /> value, if available; otherwise, the
-    /// string representation of the <see langword="enum" /> value.
+    /// The description associated with the <see langword="enum" /> value, if available; otherwise, the string representation of the <see langword="enum" /> value.
     /// </returns>
     /// <remarks>
-    /// This method retrieves the description attribute value, if present, associated
-    /// with the specified <see langword="enum" /> value.
-    /// <para />
+    /// This method retrieves the description attribute value, if present, associated with the specified <see langword="enum" /> value.
     /// If no description attribute is found, it returns the string representation of the <see langword="enum" /> value.
     /// </remarks>
     private static string GetEnumDescription(int value)
@@ -186,11 +177,8 @@ public static partial class Program
     /// If the input cannot be parsed into a valid enumeration value, returns <see cref="F:MenuDemo.MenuChoices" /> zero value.
     /// </returns>
     /// <remarks>
-    /// This method reads a line of text from the console input and attempts to parse
-    /// it into a <see cref="T:MenuDemo.MenuChoices" /> enumeration value.
-    /// <para />
+    /// This method reads a line of text from the console input and attempts to parse it into a <see cref="T:MenuDemo.MenuChoices" /> enumeration value.
     /// If the input matches any of the enumeration values, the corresponding enumeration value is returned.
-    /// <para />
     /// If the input cannot be parsed into a valid enumeration value, the method returns <see cref="F:MenuDemo.MenuChoices" /> zero value.
     /// </remarks>
     private static MenuChoices GetUserChoice()
