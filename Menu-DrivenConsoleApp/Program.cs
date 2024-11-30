@@ -26,7 +26,7 @@ public static partial class Program
             DisplayMenu();
             MenuChoices choice = GetUserChoice();
 
-            // Check if choice is within the valid range, since Enum.TryParse on GetUserChoice does return integers outside the enum's range values
+            // Check if choice is within the valid range, since Enum.TryParse in GetUserChoice does return integers outside the enum's range values
             if (Enum.IsDefined(choice))
             {
                 // Perform action based on user choice index
