@@ -13,10 +13,10 @@ public static partial class Program
     /// <remarks>
     /// This method serves as the starting point of the console application.
     /// <para />
-    /// It continuously displays a menu of choices to the user and executes the
-    /// corresponding actions based on their selection.
-    /// <para />
+    /// It continuously displays a menu of choices to the user and executes the corresponding actions based on their selection.
     /// The menu is displayed until the user decides to exit the application.
+    /// <para />
+    /// The code is based on an article by Brian C. Hart published in CodeProject in 2024.
     /// </remarks>
     /// <seealso href="https://www.codeproject.com/Articles/5382189/Building-a-Menu-Driven-Console-Application-in-Csha"/>
     public static void Main()
